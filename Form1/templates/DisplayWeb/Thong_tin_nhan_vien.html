@@ -1,0 +1,275 @@
+{% comment %}
+<h1>Nhân viên: {{ nhan_vien.Hoten }}</h1>
+<h1>Thông tin chi tiết:</h1>
+<table>
+    <thead>
+      <tr>
+        <th>Ngày kiểm tra:</th>
+        <th>Đối tượng đánh giá: </th>
+        <th>Thời gian TC: </th>
+        <th>Mã học trình: </th>
+        <th>Điểm: </th>
+        <th>Phán định: </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for list_infor in nhan_vien.thong_tin_nhan_vien_set.all %}
+      <tr>
+        <td>{{ list_infor.Ngay_kiem_tra }}</td>
+        <td>{{ list_infor.Doi_tuong_danh_gia }}</td>
+        <td>{{ list_infor.Lan_danh_gia }}</td>
+        <td>{{ list_infor.Thoi_gian_TC }}</td>
+        <td>{{ list_infor.Ma_hoc_trinh }}</td>
+        <td>{{ list_infor.Diem }}</td>
+        <td>{{ list_infor.Phan_dinh }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{% endcomment %}
+
+
+
+
+<!DOCTYPE html> 
+<html>
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /*- đoạn này cho font chữ nền chữ-*/
+    header{
+      border:1px solid #ccc;
+      background-color:#93cab3;
+      color:rgb(255, 255, 255);
+      text-align:right;
+      padding-bottom:15px;
+      min-height: 5vh;
+    }
+  
+    header h1{
+      font-size:30px;
+      text-align:left;
+    }
+  
+    header div{
+      font-size:18px;
+    }
+  
+    main{
+      background-color:#ffffff;
+      padding:20px;
+      text-align: justify;
+      min-height: 100vh;
+    }
+  
+    main h2{
+      font-family:'Segoe UI',Arial,sans-serif;
+      font-size: 1px;
+    }
+  
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #ccc;
+      text-align: center;
+      padding: 10px;
+      font-size: 15px;
+      text-decoration-color: darkseagreen;
+    }
+     /*- đoạn này cho phần table-*/
+    .md-table {
+      border-collapse: collapse;
+      width: 50%;
+      border-color: rgb(54, 39, 122);
+      color: rgb(133, 30, 30);
+      margin-top: 40px;
+      
+    }
+  
+    .md-table tbody tr:hover, .md-table tbody tr:focus {
+      cursor: pointer;
+      background-color: rgba(2, 3, 12, 0.2);
+      border: none;
+    }
+  
+    .md-table-header {
+      border-bottom: 1px solid rgb(143, 106, 132);
+      color: rgb(45, 136, 86);
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: 700;
+      padding: 16px 16px 16px 0;
+      border: none;
+    }
+  
+    .md-table-header a {
+      text-decoration: none;
+      color: blueviolet;
+      font-size: 1em;
+      border: none;
+    }
+  
+    .md-table-content {
+      white-space: nowrap;
+      font-size: 0.8em;
+      padding: 16px 16px 16px 0;
+      height: 72px;
+      color: rgb(0, 0, 0);
+      border-bottom: 1px solid rgb(255, 255, 255);
+      background-color: rgb(255, 255, 255);
+      border: 0;
+      text-align: center ;
+    }
+  
+    .md-table-thumbs {
+      max-width: 104px;
+      width: 104px;
+      padding: 16px 32px;
+      border: none;
+    }
+  
+    .md-table-thumbs div {
+      overflow: hidden;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-size: cover;
+      box-shadow: 0 8px 10px rgba(0, 0, 0, .3);
+      -webkit-box-shadow: 0 8px 10px rgba(0, 0, 0, .1);
+      border: none;
+    }
+  
+    .md-table-footer {
+      height: 40px;
+      padding-left: 32px;
+      padding-right: 32px;
+      border: none;
+    }
+  
+    .md-table-count-info {
+      line-height: 40px;
+      font-size: .75em;
+      border: none;
+    }
+  
+    .md-table-footer-item {
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      border: none;
+    }
+  
+    .md-table-active-page {
+      font-weight: 700;
+      border: none;
+    }
+  
+    .bold {
+      font-weight: 700;
+    }
+  
+    .grey {
+      color: rgb(33, 187, 148);
+    }
+  
+    table {
+      border-collapse: collapse;
+      width: 20%;
+      border: none;
+        }
+
+  
+    th, td {
+      border: none;
+      padding: 5px;
+      text-align: center;
+      font-family: "Arial", sans-serif;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+    }
+  }
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
+
+    .dropbtn {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 8px 12px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown .dropdown-icon {
+      font-size: 18px;}
+      *,*:after,*:before {
+      box-sizing:border-box;
+      -moz-box-sizing:border-box;
+      -webkit-box-sizing:border-box;
+        }
+  </style>
+</head>
+<body>
+  <h2>Thông tin đánh giá cho {{ nhan_vien.Hoten}} </h2>
+  <table class="md-table">
+    <thead>
+      <tr class="md-table-header">
+        <th>Lần đánh giá</th>
+        <th>Ngày kiểm tra</th>
+        <th>Điểm</th>
+        <th>Phán định</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for list_infor in nhan_vien.thong_tin_nhan_vien_set.all %}
+        <tr class="md-table-content">
+          <td>{{ list_infor.id }}</td>
+          <td>{{ list_infor.Ngay_kiem_tra }}</td>
+          <td>{{ list_infor.Diem }}</td>
+          <td>{{ list_infor.Phan_dinh }}</td>
+          <td>
+            <div class="dropdown">
+              <button class="dropbtn"><i class="fas fa-ellipsis-v dropdown-icon"></i></button>
+              <div class="dropdown-content">
+                <a href="{% url 'Form1:evaluate_form' list_infor.id %}">Chi tiết</a>
+                <a href="{% url 'Form1:del_infor' list_infor.id %}">Xóa thông tin</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<br></br>
+<a href="{% url 'Form1:evaluate' nhan_vien.id%}">Làm bài đánh giá</a>
+<br></br>
+<a href="{% url 'Form1:List_nhan_vien'%}">Trở về</a>
+</main>
+</body>
+</html>

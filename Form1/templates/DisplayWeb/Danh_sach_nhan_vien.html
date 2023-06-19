@@ -1,0 +1,462 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    /*- đoạn này cho font chữ nền chữ-*/
+    header{
+      border:1px solid #ccc;
+      background-color:#93cab3;
+      color:rgb(145, 25, 25);
+      text-align:right;
+      padding-bottom:15px;
+      min-height: 5vh;
+    } 
+    header h1{
+      font-size:15px;
+      text-align:right;
+    }
+    header div{
+      font-size:18px;
+    }
+    main{
+      background-color:#ffffff;
+      padding:20px;
+      text-align: justify;
+      min-height: 100vh;
+    }
+    main h2{
+      font-family:'Segoe UI',Arial,sans-serif;
+      font-size: 1px;
+    }
+    main h1{
+      font-family:'Segoe UI',Arial,sans-serif;
+      font-size: 20px;
+    }
+  
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #ccc;
+      text-align: center;
+      padding: 10px;
+      font-size: 15px;
+      text-decoration-color: darkseagreen;
+    }
+     /*- đoạn này cho phần table-*/
+    .md-table {
+      border-collapse: collapse;
+      width: 50%;
+      border-color: rgb(54, 39, 122);
+      color: rgb(133, 30, 30);
+      margin-top: 40px;
+      
+    } 
+    .md-table tbody tr:hover, .md-table tbody tr:focus {
+      cursor: pointer;
+      background-color: rgba(2, 3, 12, 0.2);
+      border: none;
+    }
+    .md-table-header {
+      border-bottom: 1px solid rgb(143, 106, 132);
+      color: rgb(45, 136, 86);
+      text-align: left;
+      font-size: 1em;
+      font-weight: 700;
+      padding: 16px 16px 16px 0;
+      border: none;
+    }  
+    .md-table-header a {
+      text-decoration: none;
+      color: blueviolet;
+      font-size: 1em;
+      border: none;
+    }  
+    .md-table-content {
+      white-space: nowrap;
+      font-size: 0.8em;
+      padding: 16px 16px 16px 0;
+      height: 72px;
+      color: rgb(0, 0, 0);
+      border-bottom: 1px solid rgb(255, 255, 255);
+      background-color: rgb(255, 255, 255);
+      border: 0;
+    }  
+    .md-table-thumbs {
+      max-width: 104px;
+      width: 104px;
+      padding: 16px 32px;
+      border: none;
+    } 
+    .md-table-thumbs div {
+      overflow: hidden;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-size: cover;
+      box-shadow: 0 8px 10px rgba(0, 0, 0, .3);
+      -webkit-box-shadow: 0 8px 10px rgba(0, 0, 0, .1);
+      border: none;
+    }  
+    .md-table-footer {
+      height: 40px;
+      padding-left: 32px;
+      padding-right: 32px;
+      border: none;
+    } 
+    .md-table-count-info {
+      line-height: 40px;
+      font-size: .75em;
+      border: none;
+    }  
+    .md-table-footer-item {
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      border: none;
+    }  
+    .md-table-active-page {
+      font-weight: 700;
+      border: none;
+    } 
+    .bold {
+      font-weight: 700;
+    }  
+    .grey {
+      color: rgb(33, 187, 148);
+    } 
+    table {
+      border-collapse: collapse;
+      width: 20%;
+      border: none;
+      }  
+    th, td {
+      border: none;
+      padding: 5px;
+      text-align: center;
+      font-family: "Arial", sans-serif;
+    } 
+    th {
+      background-color: #f2f2f2;
+    }
+     /*- đoạn này cho phần login logout signup-*/
+    .button-group {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 1px;
+    }
+    .button-form {
+      margin-right: 50px;
+      font-size: 1px;
+      padding: 1px 1px;
+      width: 1px
+    }   
+    .button-form:last-child {
+      margin-right: 1px;
+    /*- phần menu 3 chấm dọc-*/
+    }
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
+    .dropbtn {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      min-width: 200px;
+      z-index: 1;
+      border: 1px solid #ccc;  
+      border-radius: 4px; 
+      padding: 8px; 
+      font-size: 1em ;
+    }
+    .dropdown.active .dropdown-content {
+      display: block;
+      }
+    .dropdown-content a {
+      color: black;
+      padding: 12px 8px;
+      text-decoration: none;
+      display: block;
+      border: #04140d;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown .dropdown-icon {
+    font-size: 10px;}
+    *,*:after,*:before {
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+      }
+        /*-hết-*/
+
+  * {box-sizing: border-box;}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .topnav {
+      overflow: hidden;
+      background-color: #bee9d0;
+    }
+    .topnav a {
+      float: left;
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    .topnav a.active {
+      background-color: #2196F3;
+      color: white;
+    }
+    .topnav .search-container {
+      float: right;
+    }
+    .topnav input[type=text] {
+      padding: 6px;
+      margin-top: 8px;
+      font-size: 17px;
+      border: none;
+    }
+    .button1 {
+      background-color: #a1aa6f; 
+      border: none;
+      color: white;
+      padding: 7px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+    .topnav .search-container button:hover {
+      background: #ccc;
+    }
+    @media screen and (max-width: 600px) {
+    .topnav .search-container {
+      float: none;
+    }
+    .topnav a, .topnav input[type=text], .topnav .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    .topnav input[type=text] {
+      border: 1px solid #ccc;  
+    }
+    }
+      body {
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f2f2f2;
+      padding: 35px;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+    nav ul li {
+      margin-right: 10px;
+    }
+    nav ul li:first-child {
+      margin-left: 0;
+    }
+    nav ul li:last-child {
+      margin-right: 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      padding: 5px;
+    }
+    nav ul li a:hover {
+      color: #666;
+    }
+    nav ul li:nth-child(4),
+    nav ul li:nth-child(5) {
+      background-color: #333;
+      border-radius: 3px;
+    }
+    nav ul li:nth-child(4) a,
+    nav ul li:nth-child(5) a {
+      color: #fff;
+      padding: 8px 12px;
+    }
+    nav ul li:nth-child(4) a:hover,
+    nav ul li:nth-child(5) a:hover {
+      background-color: #666;
+    }
+    .form-container {
+        display: inline-block;
+        margin-right: 190px; 
+    }
+    .right-align {
+        float: right;
+        text-align: right;
+    }
+    .inline-list li {
+        display: inline-block; 
+        margin-right: 0.1em; 
+    }
+    .button {
+      background-color: #bdd85a; /* Green */
+      border: none;
+      color: rgb(0, 0, 0);
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body> 
+  <header>
+    <nav>
+      <ul>
+        <li><a href="{% url 'Form1:List_nhan_vien'%}">Home</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">About</a></li>
+        <div style="position:absolute; left:1280px; top: 0.1em;">
+          {% if request.session.username %}
+          <ul class="inline-list" style="position:absolute; left:50px; top: 10px;display: flex; align-items: center;" > 
+            <h1 style=" margin-right: 20px; "> Hi! {{ request.session.username }}</h1>
+              <form action="{% url 'Form1:user_logout' %}" method="get" class="button-form">
+                <input class= "button" type="submit" value="Logout">
+              </form>
+          </ul>
+          {% else %}
+          <ul class="inline-list"  style="position:absolute; left:50px; top: 25px;" > 
+            <li class= "button"><a href="{% url 'Form1:user_login'%}">Login</a></li>
+            <li class= "button" style="margin-left: 30px;"><a href="{% url 'Form1:user_signup'%}">Signup</a></li>
+          </ul>
+          {% endif %}
+        </div>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Import CSV</h1>
+    <div class = "form-container" >
+      <form action="{% url 'Form1:import_csv' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="file" name="csv_file" accept=".csv">
+          <button type="submit">Import</button>
+      </form>
+    </div>   
+    <div class = "form-container">
+        <form class = "search-container" action="{% url 'Form1:search_staff' %}" method="get">
+          <input class = "input" type="text" name="query" placeholder="Tìm kiếm theo mã nhân viên">
+          <input  class = "button1" type="submit" value="Tìm kiếm">
+        </form>
+    </div>
+    {% if Nhanviens %}
+      <table class="md-table">
+        <thead>
+          <tr class="md-table-header">
+            <th>Tên nhân viên</th>
+            <th>MSVN</th>
+            <th>Phòng Ban</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for Nhanvien in Nhanviens %}
+            <tr class="md-table-content">
+              <td>{{ Nhanvien.Hoten }}</td>
+              <td>{{ Nhanvien.Msnv }}</td>
+              <td>{{ Nhanvien.Phongban }}</td>
+              <td>
+                <div class="dropdown">
+                  <button class="dropbtn"><i class="fas fa-ellipsis-v dropdown-icon"></i></button>
+                  <div class="dropdown-content">
+                    <a href="{% url 'Form1:List_thong_tin' Nhanvien.id %}">Danh sách </a>
+                    <a href="{% url 'Form1:del_staff' Nhanvien.id %}">Delete</a>
+                  </div>
+                </div>
+              </td>              
+            </tr>
+          {% endfor %}
+          {% if request.session.username %}
+            {% if not show_form %}
+              <form action="{% url 'Form1:add_nv' %}" method="post">
+                {% csrf_token %}
+                    <td><input type="text" name="Hoten" id="id_Hoten" placeholder="Type here..."style="border: none;text-align: center;"></td>
+                    <td><input type="text" name="Msnv" id="id_Msnv" placeholder="Type here..." style="border: none;text-align: center;"></td>
+                    <td><input type="text" name="Phongban" id="id_Phongban" placeholder="Type here..." style="border: none;text-align: center;"></td>
+                    <td><input type="submit" value="Add Nhan Vien"></td>
+                  </tr>
+              </form> 
+              {% endif %}     
+            {% endif %}  
+        </tbody>
+      </table>
+    {% else %}
+      {% if error1 %}
+        <strong>{{ error1 }}</strong>
+      {% endif %}
+      {% if error2 %}
+        <strong>{{ error2 }}</strong>
+      {% endif %}
+      {% if error3 %}
+      <br></br>
+        {% if duplicate_datas %}
+          {% for name in duplicate_datas %}
+          <strong> Nhân viên {{ name }} đã tồn tại!</strong><br></br>
+          {% endfor %}
+          <strong> Hãy kiểm tra lại danh sách trước khi nhập CSV!</strong>
+      {% endif %}
+    {% endif %}
+    {% endif %}
+  </main>
+  <footer>
+    <div>©2023 Web cơ bản của Hồ Thành Đạt</div>
+  </footer>
+</body>
+</html>
+
+<script>
+var dropdown = document.querySelector('.dropdown');
+var dropdownContent = document.querySelector('.dropdown-content');
+  dropdown.addEventListener('click', function(event) {
+    event.stopPropagation();
+
+    dropdown.classList.toggle('active');
+  });
+
+  document.addEventListener('click', function(event) {
+    if (!dropdown.contains(event.target)) {
+      dropdown.classList.remove('active');
+    }
+  });
+</script>

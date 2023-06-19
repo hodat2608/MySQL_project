@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #83b4ac!important;
+    }
+    .login {
+      background-color: #fff;
+      width: 20%;
+      margin: 200px auto;
+      border-radius: 10px;
+      padding: 50px;
+      border-left: 30px solid #009688;
+      box-shadow: 10px 10px 10px 10px #3f51b5;
+    }
+    .login-button {
+      box-sizing: border-box;
+      color: white;
+      font-size: 14px;
+      padding: 13px;
+      border-radius: 7px;
+      border: none;
+      width: 250px;
+      outline: none;
+      background-color: rgb(56, 102, 189);
+    }
+    .input-field {
+      box-sizing: border-box;
+      font-size: 14px;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgb(11, 68, 51);
+      width: 300px;
+      outline: none;
+    }
+    .gradient-custom-2 {
+      background: #fccb90;
+      background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+      background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+      }
+      @media (min-width: 768px) {
+      .gradient-form {
+      height: 100vh !important;
+      }
+      }
+      @media (min-width: 769px) {
+      .gradient-custom-2 {
+      border-top-right-radius: .3rem;
+      border-bottom-right-radius: .3rem;
+      }
+      }
+  </style>
+</head>
+<body>
+  <div class="login">
+      {% block content %}
+      <h2>Login</h2>
+      <form class="input-field" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="login-button" type="submit">Đăng nhập</button>
+        <p><strong>No account yet? </strong> <a href="{% url 'Form1:user_signup' %}">Signup</a></p>
+      </form>
+  </div>
+</body>
+</html>
+{% endblock %}

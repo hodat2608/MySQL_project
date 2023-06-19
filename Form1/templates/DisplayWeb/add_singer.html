@@ -1,0 +1,14 @@
+<h1>Thêm ca sy moi</h1>
+<form action="{% url 'artisr:add_singer'%}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add singer">
+{% if error_messsage %}
+<strong>{{ error_messsage }}</strong>
+{% endif %}
+</form>
+<br></br>
+<form action="{% url 'artisr:index' %}" method="get">
+  <input type="submit" value="Về trang chủ">
+</form>
+

@@ -1,0 +1,466 @@
+{% comment %}
+<!DOCTYPE html> 
+<html>
+<head>
+<style>
+  .checkbox-inline {
+      display: inline;
+      margin-right: 10px;
+      }
+    .checkbox-group {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .checkbox-group label {
+        margin-right: 10px;
+    }
+    .form-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .form-row label {
+      margin-right: 10px;
+    }
+
+    .md-table {
+      border-collapse: collapse;
+      width: 50%;
+      border-color: rgb(54, 39, 122);
+      color: rgb(133, 30, 30);
+      margin-top: 40px;
+    }
+
+    .md-table td {
+      padding: 20px 46px;
+      border: 1px solid rgb(54, 39, 122);
+      color: rgb(133, 30, 30);
+    }
+  
+    .md-table tbody tr:hover, .md-table tbody tr:focus {
+      cursor: pointer;
+      background-color: rgba(2, 3, 12, 0.2);
+      border: none;
+    }
+  
+    .md-table-header {
+      border-bottom: 1px solid rgb(143, 106, 132);
+      color: rgb(45, 136, 86);
+      text-align: center;
+      font-size: 1em;
+      font-weight: 700;
+      padding: 16px 16px 16px 0;
+      border: none;
+      border-collapse: collapse;
+      border: 1px solid rgb(54, 39, 122);
+    }
+  
+    .md-table-header th {
+      padding: 20px 20px;
+      border: 1px solid rgb(54, 39, 122);
+      color: rgb(133, 30, 30);
+    }
+  
+    .md-table-content {
+      white-space: nowrap;
+      font-size: 0.8em;
+      padding: 16px 16px 16px 0;
+      height: 72px;
+      color: rgb(0, 0, 0);
+      border-bottom: 1px solid rgb(255, 255, 255);
+      background-color: rgb(255, 255, 255);
+      border: 0;
+      text-align: center;
+    }
+    .md-table-thumbs {
+      max-width: 104px;
+      width: 104px;
+      padding: 16px 32px;
+      border: none;
+    }
+  
+    .md-table-thumbs div {
+      overflow: hidden;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-size: cover;
+      box-shadow: 0 8px 10px rgba(0, 0, 0, .3);
+      -webkit-box-shadow: 0 8px 10px rgba(0, 0, 0, .1);
+      border: none;
+    }
+  
+    .md-table-footer {
+      height: 40px;
+      padding-left: 32px;
+      padding-right: 32px;
+      border: none;
+    }
+  
+    .md-table-count-info {
+      line-height: 40px;
+      font-size: .75em;
+      border: none;
+    }
+  
+    .md-table-footer-item {
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      border: none;
+    }
+  
+    .md-table-active-page {
+      font-weight: 700;
+      border: none;
+    }
+  
+    .bold {
+      font-weight: 700;
+    }
+  
+    .grey {
+      color: rgb(33, 187, 148);
+    }
+  
+    table {
+      border-collapse: collapse;
+      width: 20%;
+      border: none;
+        }
+    th, td {
+      border: none;
+      padding: 5px;
+      text-align: center;
+      font-family: "Arial", sans-serif;
+    }
+
+</style>
+</head>
+<body>
+<h1>Form đánh giá </h1>
+<form action="{% url 'Form1:evaluate' staff.id %}" method="post">
+  {% csrf_token %}
+  <div class="form-row">
+    <p><strong>Đối tượng đánh giá:</strong></p>
+      <div class="checkbox-group">
+        <input type="checkbox" id="1" name="Doi_tuong_danh_gia" value="Nhân viên thao tác">
+        <label for="1">Nhân viên thao tác</label>
+        <input type="checkbox" id="2" name="Doi_tuong_danh_gia" value="Nhân viên mới">
+        <label for="2">Nhân viên mới</label>
+        <input type="checkbox" id="3" name="Doi_tuong_danh_gia" value="Nhân viên đa năng CD">
+        <label for="3">Nhân viên đa năng CD</label>
+        <input type="checkbox" id="4" name="Doi_tuong_danh_gia" value="Người hướng dẫn">
+        <label for="4">Người hướng dẫn</label>
+      </div>
+  </div>
+  <div class="form-row">
+    <p><strong>Lần đánh giá:</strong></p><pre>     </pre>
+      <div class="checkbox-group">
+        <input type="checkbox" id="5" name="Lan_danh_gia" value="Đánh giá lần đầu">
+        <label for="5">Đánh giá lần đầu</label>
+        <input type="checkbox" id="6" name="Lan_danh_gia" value="Tái đánh giá định kỳ">
+        <label for="6">Tái đánh giá định kỳ</label>
+        <input type="checkbox" id="7" name="Lan_danh_gia" value="Tái đánh giá xác suất">
+        <label for="7">Tái đánh giá xác suất</label>
+      </div>
+      <p><strong>Thời gian TC:</strong></p>
+      <input type="text" id="Thoi_gian_TC" name="Thoi_gian_TC" required style="width: 100px;"><pre> </pre>
+      <p><strong>Mã học trình:</strong></p>
+      <input type="text" id="Ma_hoc_trinh" name="Ma_hoc_trinh" required style="width: 100px;">
+    </div>
+  <table class="md-table"> 
+      <tr class="md-table-header">
+        <th>HỌ VÀ TÊN</th>
+        <th>MSVN</th>
+        <th>PHÒNG BAN</th>
+        <th>NGÀY KIỂM TRA</th>
+        <th>ĐIỂM</th>
+        <th>PHÁN ĐỊNH</th>
+      </tr>
+      <tr class="md-table-content">
+        <td>{{ staff.Hoten }}</td>
+        <td>{{ staff.Msnv }}</td>
+        <td>{{ staff.Phongban }}</td>
+        <td><input type="text" id="Ngay_kiem_tra" name="Ngay_kiem_tra" required placeholder="Type here..."style="width: 100px; border: none;"></td>
+        <td><input type="text" id="Diem" name="Diem" required placeholder="Type here..."style="width: 100px;border: none;"></td>
+        <td><input type="text" id="Phan_dinh" name="Phan_dinh" required placeholder="Type here..."style="width: 100px;border: none;"></td>
+      </tr>  
+  </table>
+  <br></br>
+  <input type="submit" value="Thêm">
+</form>
+<br></br>
+<a href="{% url 'Form1:List_thong_tin' staff.id%}">Trở về</a>
+<br></br>
+</body>
+</html>
+{% endcomment %}
+
+
+
+<!DOCTYPE html> 
+<html>
+<head>
+<style>
+  .checkbox-inline {
+      display: inline;
+      margin-right: 10px;
+      }
+    .checkbox-group {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .checkbox-group label {
+        margin-right: 10px;
+    }
+    .form-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .form-row label {
+      margin-right: 10px;
+    }
+
+    .md-table {
+      border-collapse: collapse;
+    width: 50%;
+    border-color: rgb(54, 39, 122);
+    color: rgb(133, 30, 30);
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    .md-table td {
+      padding: 20px 46px;
+      border: 1px solid rgb(54, 39, 122);
+      color: rgb(133, 30, 30);
+    }
+
+    .md-table2 {
+      border-collapse: collapse;
+    width: 50%;
+    border-color: rgb(54, 39, 122);
+    color: rgb(133, 30, 30);
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    .md-table2 td {
+      padding: 1px 27px;
+      border: 1px solid rgb(54, 39, 122);
+      color: rgb(133, 30, 30);
+    }
+    
+  
+    .md-table tbody tr:hover, .md-table tbody tr:focus {
+      cursor: pointer;
+      background-color: rgba(2, 3, 12, 0.2);
+      border: none;
+    }
+  
+    .md-table-header {
+      border-bottom: 1px solid rgb(143, 106, 132);
+      color: rgb(45, 136, 86);
+      text-align: center;
+      font-size: 1em;
+      font-weight: 700;
+      padding: 16px 16px 16px 0;
+      border: none;
+      border-collapse: collapse;
+      border: 1px solid rgb(54, 39, 122);
+    }
+  
+    .md-table-header th {
+      padding: 20px 20px;
+      border: 1px solid rgb(54, 39, 122);
+      color: rgb(133, 30, 30);
+    }
+  
+    .md-table-content {
+      white-space: nowrap;
+      font-size: 0.8em;
+      padding: 16px 16px 16px 0;
+      height: 72px;
+      color: rgb(0, 0, 0);
+      border-bottom: 1px solid rgb(255, 255, 255);
+      background-color: rgb(255, 255, 255);
+      border: 0;
+      text-align: left;
+    }
+    .md-table-content1 {
+      white-space: nowrap;
+      font-size: 0.8em;
+      padding: 16px 16px 16px 0;
+      height: 72px;
+      color: rgb(0, 0, 0);
+      border-bottom: 1px solid rgb(255, 255, 255);
+      background-color: rgb(255, 255, 255);
+      border: 0;
+      text-align: left;
+    }
+    .md-table-content1 td {
+      text-align: left;
+    }
+  
+    .md-table-thumbs {
+      max-width: 104px;
+      width: 104px;
+      padding: 16px 32px;
+      border: none;
+    }
+  
+    .md-table-thumbs div {
+      overflow: hidden;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-size: cover;
+      box-shadow: 0 8px 10px rgba(0, 0, 0, .3);
+      -webkit-box-shadow: 0 8px 10px rgba(0, 0, 0, .1);
+      border: none;
+    }
+  
+    .md-table-footer {
+      height: 40px;
+      padding-left: 32px;
+      padding-right: 32px;
+      border: none;
+    }
+  
+    .md-table-count-info {
+      line-height: 40px;
+      font-size: .75em;
+      border: none;
+    }
+  
+    .md-table-footer-item {
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      border: none;
+    }
+  
+    .md-table-active-page {
+      font-weight: 700;
+      border: none;
+    }
+  
+    .bold {
+      font-weight: 700;
+    }
+  
+    .grey {
+      color: rgb(33, 187, 148);
+    }
+  
+    table {
+      border-collapse: collapse;
+      width: 20%;
+      border: none;
+        }
+    th, td {
+      border: none;
+      padding: 5px;
+      text-align: center;
+      font-family: "Arial", sans-serif;
+    }
+    header{
+      border:1px solid #ccc;
+      background-color:#ffffff;
+      color:rgb(0, 0, 0);
+      text-align:right;
+      padding-bottom:15px;
+      min-height: 5vh;
+    }
+  
+    header h1{
+      font-size:30px;
+      text-align:center;
+      font-family: "Arial", sans-serif;
+    }
+</style>
+</head>
+<body>
+<header>
+  <h1>PHIẾU ĐÁNH GIÁ KỸ NĂNG THỰC TẾ <br>
+    CÔNG ĐOẠN HÀN CHÂN TỤ ĐIỆN VÀ CUỘN CẢM</h1>
+</header>
+<form action="{% url 'Form1:evaluate' staff.id %}" method="post">
+  {% csrf_token %}
+  <table class="md-table2"> 
+    <tr class="md-table-content1">
+      <div class="checkbox-group"></div>
+        <td><strong>Đối tượng đánh giá:</strong></td>
+        <td><input type="checkbox" id="1" name="Doi_tuong_danh_gia" value="Nhân viên thao tác" onclick="handleCheckbox(this)">
+          <label for="1">Nhân viên thao tác</label></td>
+        <td><input type="checkbox" id="2" name="Doi_tuong_danh_gia" value="Nhân viên mới" onclick="handleCheckbox(this)">
+          <label for="2">Nhân viên mới</label></td>
+        <td><input type="checkbox" id="3" name="Doi_tuong_danh_gia" value="Nhân viên đa năng CD" onclick="handleCheckbox(this)">
+          <label for="3">Nhân viên đa năng CD</label></td>
+        <td><input type="checkbox" id="4" name="Doi_tuong_danh_gia" value="Người hướng dẫn" onclick="handleCheckbox(this)">
+          <label for="4">Người hướng dẫn</label></td>
+    </tr>
+    <tr class="md-table-content1">
+      <div class="checkbox-group"></div>
+        <td><strong>Lần đánh giá:</strong></td>
+        <td><input type="checkbox" id="5" name="Lan_danh_gia" value="Đánh giá lần đầu" onclick="handleCheckbox(this)">
+          <label for="5">Đánh giá lần đầu</label></td>
+        <td><input type="checkbox" id="6" name="Lan_danh_gia" value="Tái đánh giá định kỳ" onclick="handleCheckbox(this)">
+          <label for="6">Tái đánh giá định kỳ</label></td>
+        <td><input type="checkbox" id="7" name="Lan_danh_gia" value="Tái đánh giá xác suất" onclick="handleCheckbox(this)">
+          <label for="7">Tái đánh giá xác suất</label></td>
+        <td><p><strong>Thời gian TC:</strong>
+          <input type="text" id="Thoi_gian_TC" name="Thoi_gian_TC" required style="width: 100px;"></p>
+          <p><strong>Mã học trình:</strong>
+          <input type="text" id="Ma_hoc_trinh" name="Ma_hoc_trinh" required style="width: 100px;"></p></td>
+    </tr>
+  </table>
+  <table class="md-table"> 
+    <tr class="md-table-header">
+      <th>HỌ VÀ TÊN</th>
+      <th>MSVN</th>
+      <th>PHÒNG BAN</th>
+      <th>NGÀY KIỂM TRA</th>
+      <th>ĐIỂM</th>
+      <th>PHÁN ĐỊNH</th>
+    </tr>
+    <tr class="md-table-content">
+      <td>{{ staff.Hoten }}</td>
+      <td>{{ staff.Msnv }}</td>
+      <td>{{ staff.Phongban }}</td>
+      <td><input type="text" id="Ngay_kiem_tra" name="Ngay_kiem_tra" required placeholder="Type here..."style="width: 100px; border: none;"></td>
+      <td><input type="text" id="Diem" name="Diem" required placeholder="Type here..."style="width: 100px;border: none;"></td>
+      <td><input type="checkbox" id="8" name="Phan_dinh" value="ĐẠT" onclick="handleCheckbox(this)">
+        <label for="8">ĐẠT</label>
+      <input type="checkbox" id="9" name="Phan_dinh" value="KHÔNG ĐẠT" onclick="handleCheckbox(this)">
+        <label for="9">KHÔNG ĐẠT</label></td>
+    </tr>  
+  </table>
+  <br></br>
+  <input type="submit" value="Thêm">
+</form>
+<br></br>
+<a href="{% url 'Form1:List_thong_tin' staff.id%}">Trở về</a>
+<br></br>
+</body>
+</html>
+
+
+<script>
+  function handleCheckbox(checkbox) {
+    var checkboxes = checkbox.parentElement.parentElement.getElementsByTagName("input");
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i] !== checkbox) {
+        checkboxes[i].checked = false;
+      }
+    }
+  }
+</script>
